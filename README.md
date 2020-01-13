@@ -12,10 +12,10 @@ end
 ```erb
 <%= form.nested_fields :comments do |f| %>
   <%= f.text_field :content %>
-  <%= f.remove_nested_fields_link %>
+  <%= f.remove_nested_fields_link 'remove' %>
 <% end %>
 
-<%= form.add_nested_fields_link :comments %>
+<%= form.add_nested_fields_link :comments, 'add' %>
 ```
 
 ## Installation
@@ -23,7 +23,7 @@ end
 Gemfile
 
 ```ruby
-gem 'nested_fields', git: 'https://github.com/kmdtmyk/nested_fields'
+gem 'nested_fields', git: 'https://github.com/kmdtmyk/nested_fields', ref: '<commit_hash>'
 ```
 
 app/assets/config/manifest.js
