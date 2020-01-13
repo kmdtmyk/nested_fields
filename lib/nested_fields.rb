@@ -30,15 +30,15 @@ module ActionView::Helpers
       output
     end
 
-    def add_nested_fields_link(name)
+    def add_nested_fields_link(name, text)
       @template.content_tag(:button, type: 'button', 'data-target': name, onclick: 'addNestedFields(this)') do
-        'add'
+        text
       end
     end
 
-    def remove_nested_fields_link
+    def remove_nested_fields_link(text)
       @template.content_tag(:button, type: 'button', onclick: 'removeNestedFields(this)') do
-        'remove'
+        text
       end
     end
 
