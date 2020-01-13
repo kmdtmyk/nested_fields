@@ -18,9 +18,11 @@
 
   <div>
     <label>Comments</label>
-    <%= form.fields_for :comments do |f| %>
+    <%= form.nested_fields :comments do |f| %>
       <%= f.text_field :content %>
+      <%= f.remove_nested_fields_link %>
     <% end %>
+    <%= form.add_nested_fields_link :comments %>
   </div>
 
   <div>
