@@ -12,10 +12,10 @@ end
 ```erb
 <%= form.nested_fields :comments do |f| %>
   <%= f.text_field :content %>
-  <%= f.remove_nested_fields_link 'remove' %>
+  <%= f.remove_nested_fields_button 'remove' %>
 <% end %>
 
-<%= form.add_nested_fields_link :comments, 'add' %>
+<%= form.add_nested_fields_button :comments, 'add' %>
 ```
 
 ## Installation
