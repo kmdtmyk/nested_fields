@@ -31,13 +31,13 @@ module ActionView::Helpers
     end
 
     def add_nested_fields_button(name, text)
-      @template.content_tag(:button, type: 'button', 'data-target': name, onclick: 'addNestedFields(this)') do
+      @template.content_tag(:button, type: 'button', 'data-target': name, onclick: 'NestedFields.add(this)') do
         text
       end
     end
 
     def remove_nested_fields_button(text)
-      @template.content_tag(:button, type: 'button', onclick: 'removeNestedFields(this)') do
+      @template.content_tag(:button, type: 'button', onclick: 'NestedFields.remove(this)') do
         text
       end
     end
