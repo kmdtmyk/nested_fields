@@ -1,0 +1,31 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - '*'
+    tags:
+      - '!*'
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        ruby-version: ['2.6.x', '2.5.x']
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Ruby ${{ matrix.ruby-version }}
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+    - name: Install dependencies
+      run: sudo apt-get install libsqlite3-dev
+    - name: Build and test with Rspec
+      run: |
+        gem install bundler:1.17.3
+        bundle install --jobs 4 --retry 3
+        bundle exec rspec
