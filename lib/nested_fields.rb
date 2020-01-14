@@ -17,7 +17,8 @@ module ActionView::Helpers
 
       object.send(name).each do |child|
         output << @template.content_tag(:div, class: "#{name}_nested_fields") do
-          fields_for_nested_model("#{object_name}[#{name}_attributes][#{options[:child_index]}]", child, options, block)
+          child_index = nested_child_index(name)
+          fields_for_nested_model("#{object_name}[#{name}_attributes][#{child_index}]", child, options, block)
         end
       end
 
