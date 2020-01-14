@@ -24,7 +24,7 @@ module ActionView::Helpers
 
       output << @template.content_tag(:template, id: "#{name}_nested_fields_template") do
         @template.content_tag(:div, class: "#{name}_nested_fields") do
-          @template.fields_for("#{object_name}[#{name}_attributes][_]", object, options, &block)
+          @template.fields_for("#{object_name}[#{name}_attributes][__index__]", object, options, &block)
         end
       end
 
