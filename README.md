@@ -1,3 +1,5 @@
+[![Test](https://github.com/kmdtmyk/nested_fields/workflows/Test/badge.svg)](https://github.com/kmdtmyk/nested_fields/actions)
+
 # NestedFields
 
 ## Usage
