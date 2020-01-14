@@ -11,20 +11,23 @@ module ActionView::Helpers
 
   class FormBuilder
 
-    def nested_fields(name, &block)
+    def nested_fields(name, options = nil, &block)
+      options ||= {}
+
+      tag = options[:tag] || :div
 
       output = ActiveSupport::SafeBuffer.new
 
       object.send(name).each do |child|
-        output << @template.content_tag(:div, class: "#{name}_nested_fields") do
+        output << @template.content_tag(tag, class: "#{name}_nested_fields") do
           child_index = nested_child_index(name)
-          fields_for_nested_model("#{object_name}[#{name}_attributes][#{child_index}]", child, options, block)
+          fields_for_nested_model("#{object_name}[#{name}_attributes][#{child_index}]", child, self.options, block)
         end
       end
 
       output << @template.content_tag(:template, id: "#{name}_nested_fields_template") do
-        @template.content_tag(:div, class: "#{name}_nested_fields") do
-          @template.fields_for("#{object_name}[#{name}_attributes][__index__]", object, options, &block)
+        @template.content_tag(tag, class: "#{name}_nested_fields") do
+          @template.fields_for("#{object_name}[#{name}_attributes][__index__]", object, self.options, &block)
         end
       end
 

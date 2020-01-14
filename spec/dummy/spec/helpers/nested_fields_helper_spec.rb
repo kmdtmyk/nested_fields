@@ -17,6 +17,30 @@ RSpec.describe ApplicationHelper, type: :helper do
       expect(form).to include("div class=\"comments_nested_fields\"")
     end
 
+    example 'tag' do
+      book = Book.new
+
+      form = form_with(model: book) do |f|
+        f.nested_fields :comments, tag: :span do |ff|
+        end
+      end
+
+      expect(form).to include("span class=\"comments_nested_fields\"")
+    end
+
+    example 'nested form' do
+      book = Book.new
+      book.comments.new
+
+      form = form_with(model: book) do |f|
+        f.nested_fields :comments do |ff|
+          ff.text_field :content
+        end
+      end
+
+      expect(form).to include("input type=\"text\" name=\"book[comments_attributes][0][content]\"")
+    end
+
   end
 
 end
