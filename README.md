@@ -46,6 +46,12 @@ app/views/layouts/application.html.erb
 = javascript_include_tag 'application'
 ```
 
+## Test
+
+```
+bundle exec rspec
+```
+
 ## License
 
 MIT
