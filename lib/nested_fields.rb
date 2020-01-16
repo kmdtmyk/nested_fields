@@ -37,8 +37,19 @@ module ActionView::Helpers
       output
     end
 
-    def add_nested_fields_button(name, text = nil, &block)
-      @template.content_tag(:button, type: 'button', 'data-target': name, onclick: 'NestedFields.add(this)') do
+    def add_nested_fields_button(name, text = nil, options = nil, &block)
+      options ||= {}
+
+      tag = options.delete(:tag){ :button }
+
+      if tag == :button
+        options[:type] = 'button'
+      end
+
+      options['data-target'] = name
+      options[:onclick] = 'NestedFields.add(this)'
+
+      @template.content_tag(tag, options) do
         if block_given?
           yield block
         else
@@ -47,8 +58,18 @@ module ActionView::Helpers
       end
     end
 
-    def remove_nested_fields_button(text = nil, &block)
-      @template.content_tag(:button, type: 'button', onclick: 'NestedFields.remove(this)') do
+    def remove_nested_fields_button(text = nil, options = nil, &block)
+      options ||= {}
+
+      tag = options.delete(:tag){ :button }
+
+      if tag == :button
+        options[:type] = 'button'
+      end
+
+      options[:onclick] = 'NestedFields.remove(this)'
+
+      @template.content_tag(tag, options) do
         if block_given?
           yield block
         else
