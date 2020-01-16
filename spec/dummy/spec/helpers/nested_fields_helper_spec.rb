@@ -65,4 +65,84 @@ RSpec.describe ApplicationHelper, type: :helper do
 
   end
 
+  describe 'add_nested_fields_button' do
+
+    example 'basic' do
+      book = Book.new
+
+      form = form_with(model: book) do |f|
+        f.add_nested_fields_button :comments, 'add text'
+      end
+
+      expect(form).to include("<button type=\"button\"")
+      expect(form).to include("onclick=\"NestedFields.add(this)\"")
+    end
+
+    example 'text' do
+      book = Book.new
+
+      form = form_with(model: book) do |f|
+        f.add_nested_fields_button :comments, 'add text'
+      end
+
+      expect(form).to include(">add text</button>")
+    end
+
+    example 'block' do
+      book = Book.new
+
+      form = form_with(model: book) do |f|
+        f.add_nested_fields_button :comments do
+          'block text'
+        end
+      end
+
+      expect(form).to include(">block text</button>")
+    end
+
+  end
+
+  describe 'remove_nested_fields_button' do
+
+    example 'basic' do
+      book = Book.new
+
+      form = form_with(model: book) do |f|
+        f.nested_fields :comments do |ff|
+          ff.remove_nested_fields_button 'remove text'
+        end
+      end
+
+      expect(form).to include("<button type=\"button\"")
+      expect(form).to include("onclick=\"NestedFields.remove(this)\"")
+    end
+
+    example 'text' do
+      book = Book.new
+
+      form = form_with(model: book) do |f|
+        f.nested_fields :comments do |ff|
+          ff.remove_nested_fields_button 'remove text'
+        end
+      end
+
+      expect(form).to include(">remove text</button>")
+    end
+
+    example 'block' do
+      book = Book.new
+
+      form = form_with(model: book) do |f|
+        f.nested_fields :comments do |ff|
+          ff.remove_nested_fields_button do
+            'block text'
+          end
+        end
+      end
+
+      expect(form).to include(">block text</button>")
+    end
+
+  end
+
 end
