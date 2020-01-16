@@ -28,6 +28,28 @@ RSpec.describe ApplicationHelper, type: :helper do
       expect(form).to include("span class=\"comments_nested_fields\"")
     end
 
+    example 'class' do
+      book = Book.new
+
+      form = form_with(model: book) do |f|
+        f.nested_fields :comments, class: 'foo' do |ff|
+        end
+      end
+
+      expect(form).to include("div class=\"comments_nested_fields foo\"")
+    end
+
+    example 'class (array)' do
+      book = Book.new
+
+      form = form_with(model: book) do |f|
+        f.nested_fields :comments, class: ['foo', 'bar'] do |ff|
+        end
+      end
+
+      expect(form).to include("div class=\"comments_nested_fields foo bar\"")
+    end
+
     example 'nested form' do
       book = Book.new
       book.comments.new
