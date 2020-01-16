@@ -88,18 +88,6 @@ RSpec.describe ApplicationHelper, type: :helper do
       expect(form).to include(">add text</button>")
     end
 
-    example 'block' do
-      book = Book.new
-
-      form = form_with(model: book) do |f|
-        f.add_nested_fields_button :comments do
-          'block text'
-        end
-      end
-
-      expect(form).to include(">block text</button>")
-    end
-
     example 'tag' do
       book = Book.new
 
@@ -130,6 +118,34 @@ RSpec.describe ApplicationHelper, type: :helper do
       expect(form).to include("<button class=\"foo bar\"")
     end
 
+    context 'block' do
+
+      example 'basic' do
+        book = Book.new
+
+        form = form_with(model: book) do |f|
+          f.add_nested_fields_button :comments do
+            'block'
+          end
+        end
+
+        expect(form).to include(">block</button>")
+      end
+
+      example 'options' do
+        book = Book.new
+
+        form = form_with(model: book) do |f|
+          f.add_nested_fields_button :comments, tag: :span, class: 'foo' do
+            'block'
+          end
+        end
+
+        expect(form).to include("<span class=\"foo\"")
+      end
+
+    end
+
   end
 
   describe 'remove_nested_fields_button' do
@@ -157,20 +173,6 @@ RSpec.describe ApplicationHelper, type: :helper do
       end
 
       expect(form).to include(">remove text</button>")
-    end
-
-    example 'block' do
-      book = Book.new
-
-      form = form_with(model: book) do |f|
-        f.nested_fields :comments do |ff|
-          ff.remove_nested_fields_button do
-            'block text'
-          end
-        end
-      end
-
-      expect(form).to include(">block text</button>")
     end
 
     example 'tag' do
@@ -207,6 +209,38 @@ RSpec.describe ApplicationHelper, type: :helper do
       end
 
       expect(form).to include("<button class=\"foo bar\"")
+    end
+
+    context 'block' do
+
+      example 'basic' do
+        book = Book.new
+
+        form = form_with(model: book) do |f|
+          f.nested_fields :comments do |ff|
+            ff.remove_nested_fields_button do
+              'block'
+            end
+          end
+        end
+
+        expect(form).to include(">block</button>")
+      end
+
+      example 'options' do
+        book = Book.new
+
+        form = form_with(model: book) do |f|
+          f.nested_fields :comments do |ff|
+            ff.remove_nested_fields_button tag: :span, class: 'foo' do
+              'block'
+            end
+          end
+        end
+
+        expect(form).to include("<span class=\"foo\"")
+      end
+
     end
 
   end
