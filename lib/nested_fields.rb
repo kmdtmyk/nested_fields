@@ -30,7 +30,7 @@ module ActionView::Helpers
 
       output << @template.content_tag(:template, id: "#{name}_nested_fields_template") do
         @template.content_tag(tag, options) do
-          @template.fields_for("#{object_name}[#{name}_attributes][__index__]", object, self.options, &block)
+          @template.fields_for("#{object_name}[#{name}_attributes][__index__]", nil, self.options, &block)
         end
       end
 
