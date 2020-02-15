@@ -10,57 +10,57 @@ RSpec.describe ApplicationHelper, type: :helper do
       book = Book.new
 
       form = form_with(model: book) do |f|
-        f.nested_fields :comments do |ff|
+        f.nested_fields :reviews do |ff|
         end
       end
 
-      expect(form).to include("div class=\"comments_nested_fields\"")
+      expect(form).to include("div class=\"reviews_nested_fields\"")
     end
 
     example 'tag' do
       book = Book.new
 
       form = form_with(model: book) do |f|
-        f.nested_fields :comments, tag: :span do |ff|
+        f.nested_fields :reviews, tag: :span do |ff|
         end
       end
 
-      expect(form).to include("span class=\"comments_nested_fields\"")
+      expect(form).to include("span class=\"reviews_nested_fields\"")
     end
 
     example 'class' do
       book = Book.new
 
       form = form_with(model: book) do |f|
-        f.nested_fields :comments, class: 'foo' do |ff|
+        f.nested_fields :reviews, class: 'foo' do |ff|
         end
       end
 
-      expect(form).to include("div class=\"comments_nested_fields foo\"")
+      expect(form).to include("div class=\"reviews_nested_fields foo\"")
     end
 
     example 'class (array)' do
       book = Book.new
 
       form = form_with(model: book) do |f|
-        f.nested_fields :comments, class: ['foo', 'bar'] do |ff|
+        f.nested_fields :reviews, class: ['foo', 'bar'] do |ff|
         end
       end
 
-      expect(form).to include("div class=\"comments_nested_fields foo bar\"")
+      expect(form).to include("div class=\"reviews_nested_fields foo bar\"")
     end
 
     example 'nested form' do
       book = Book.new
-      book.comments.new
+      book.reviews.new
 
       form = form_with(model: book) do |f|
-        f.nested_fields :comments do |ff|
-          ff.text_field :content
+        f.nested_fields :reviews do |ff|
+          ff.text_field :comment
         end
       end
 
-      expect(form).to include("input type=\"text\" name=\"book[comments_attributes][0][content]\"")
+      expect(form).to include("input type=\"text\" name=\"book[reviews_attributes][0][comment]\"")
     end
 
   end
@@ -71,7 +71,7 @@ RSpec.describe ApplicationHelper, type: :helper do
       book = Book.new
 
       form = form_with(model: book) do |f|
-        f.add_nested_fields_button :comments, 'add text'
+        f.add_nested_fields_button :reviews, 'add text'
       end
 
       expect(form).to include("<button type=\"button\"")
@@ -82,7 +82,7 @@ RSpec.describe ApplicationHelper, type: :helper do
       book = Book.new
 
       form = form_with(model: book) do |f|
-        f.add_nested_fields_button :comments, 'add text'
+        f.add_nested_fields_button :reviews, 'add text'
       end
 
       expect(form).to include(">add text</button>")
@@ -92,7 +92,7 @@ RSpec.describe ApplicationHelper, type: :helper do
       book = Book.new
 
       form = form_with(model: book) do |f|
-        f.add_nested_fields_button :comments, 'add', tag: :span
+        f.add_nested_fields_button :reviews, 'add', tag: :span
       end
 
       expect(form).to include(">add</span>")
@@ -102,7 +102,7 @@ RSpec.describe ApplicationHelper, type: :helper do
       book = Book.new
 
       form = form_with(model: book) do |f|
-        f.add_nested_fields_button :comments, 'add', class: 'foo'
+        f.add_nested_fields_button :reviews, 'add', class: 'foo'
       end
 
       expect(form).to include("<button class=\"foo\"")
@@ -112,7 +112,7 @@ RSpec.describe ApplicationHelper, type: :helper do
       book = Book.new
 
       form = form_with(model: book) do |f|
-        f.add_nested_fields_button :comments, 'add', class: ['foo', 'bar']
+        f.add_nested_fields_button :reviews, 'add', class: ['foo', 'bar']
       end
 
       expect(form).to include("<button class=\"foo bar\"")
@@ -124,7 +124,7 @@ RSpec.describe ApplicationHelper, type: :helper do
         book = Book.new
 
         form = form_with(model: book) do |f|
-          f.add_nested_fields_button :comments do
+          f.add_nested_fields_button :reviews do
             'block'
           end
         end
@@ -136,7 +136,7 @@ RSpec.describe ApplicationHelper, type: :helper do
         book = Book.new
 
         form = form_with(model: book) do |f|
-          f.add_nested_fields_button :comments, tag: :span, class: 'foo' do
+          f.add_nested_fields_button :reviews, tag: :span, class: 'foo' do
             'block'
           end
         end
@@ -154,7 +154,7 @@ RSpec.describe ApplicationHelper, type: :helper do
       book = Book.new
 
       form = form_with(model: book) do |f|
-        f.nested_fields :comments do |ff|
+        f.nested_fields :reviews do |ff|
           ff.remove_nested_fields_button 'remove text'
         end
       end
@@ -167,7 +167,7 @@ RSpec.describe ApplicationHelper, type: :helper do
       book = Book.new
 
       form = form_with(model: book) do |f|
-        f.nested_fields :comments do |ff|
+        f.nested_fields :reviews do |ff|
           ff.remove_nested_fields_button 'remove text'
         end
       end
@@ -179,7 +179,7 @@ RSpec.describe ApplicationHelper, type: :helper do
       book = Book.new
 
       form = form_with(model: book) do |f|
-        f.nested_fields :comments do |ff|
+        f.nested_fields :reviews do |ff|
           ff.remove_nested_fields_button 'remove', tag: :span
         end
       end
@@ -191,7 +191,7 @@ RSpec.describe ApplicationHelper, type: :helper do
       book = Book.new
 
       form = form_with(model: book) do |f|
-        f.nested_fields :comments do |ff|
+        f.nested_fields :reviews do |ff|
           ff.remove_nested_fields_button 'remove', class: 'foo'
         end
       end
@@ -203,7 +203,7 @@ RSpec.describe ApplicationHelper, type: :helper do
       book = Book.new
 
       form = form_with(model: book) do |f|
-        f.nested_fields :comments do |ff|
+        f.nested_fields :reviews do |ff|
           ff.remove_nested_fields_button 'remove', class: ['foo', 'bar']
         end
       end
@@ -217,7 +217,7 @@ RSpec.describe ApplicationHelper, type: :helper do
         book = Book.new
 
         form = form_with(model: book) do |f|
-          f.nested_fields :comments do |ff|
+          f.nested_fields :reviews do |ff|
             ff.remove_nested_fields_button do
               'block'
             end
@@ -231,7 +231,7 @@ RSpec.describe ApplicationHelper, type: :helper do
         book = Book.new
 
         form = form_with(model: book) do |f|
-          f.nested_fields :comments do |ff|
+          f.nested_fields :reviews do |ff|
             ff.remove_nested_fields_button tag: :span, class: 'foo' do
               'block'
             end

@@ -38,12 +38,24 @@
   </div>
 
   <div>
-    <label>Comments</label>
-    <%= form.nested_fields :comments do |f| %>
-      <%= f.text_field :content %>
-      <%= f.remove_nested_fields_button 'remove' %>
-    <% end %>
-    <%= form.add_nested_fields_button :comments, 'Add comment' %>
+    <label>Reviews</label>
+    <table>
+      <thead>
+        <tr>
+          <th>Rating</th>
+          <th>Comment</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= form.nested_fields :reviews, tag: :tr do |f| %>
+          <td><%= f.number_field :star_rating %></td>
+          <td><%= f.text_field :comment %></td>
+          <td><%= f.remove_nested_fields_button 'remove' %></td>
+        <% end %>
+      <tbody>
+    </table>
+    <%= form.add_nested_fields_button :reviews, 'Add review' %>
   </div>
 
   <div>

@@ -5,6 +5,6 @@ class Book < ApplicationRecord
   accepts_nested_attributes_for :tags, allow_destroy: true
   validates_length_of :tags, maximum: 3
 
-  has_many :comments, class_name: 'BookComment', dependent: :destroy
-  accepts_nested_attributes_for :comments, allow_destroy: true
+  has_many :reviews, class_name: 'BookReview', dependent: :destroy
+  accepts_nested_attributes_for :reviews, allow_destroy: true
 end

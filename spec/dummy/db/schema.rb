@@ -12,12 +12,13 @@
 
 ActiveRecord::Schema.define(version: 2020_01_13_090642) do
 
-  create_table "book_comments", force: :cascade do |t|
+  create_table "book_reviews", force: :cascade do |t|
     t.integer "book_id"
-    t.string "content"
+    t.string "comment"
+    t.integer "star_rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_book_comments_on_book_id"
+    t.index ["book_id"], name: "index_book_reviews_on_book_id"
   end
 
   create_table "book_tags", force: :cascade do |t|
@@ -36,6 +37,6 @@ ActiveRecord::Schema.define(version: 2020_01_13_090642) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "book_comments", "books"
+  add_foreign_key "book_reviews", "books"
   add_foreign_key "book_tags", "books"
 end

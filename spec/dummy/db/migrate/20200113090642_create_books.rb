@@ -16,9 +16,10 @@ class CreateBooks < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    create_table :book_comments do |t|
+    create_table :book_reviews do |t|
       t.references :book, foreign_key: true
-      t.string :content
+      t.string :comment
+      t.integer :star_rating
 
       t.timestamps
     end

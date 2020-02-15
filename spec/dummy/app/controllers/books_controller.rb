@@ -62,9 +62,10 @@ class BooksController < ApplicationController
           :name,
           :_destroy,
         ],
-        comments_attributes: [
+        reviews_attributes: [
           :id,
-          :content,
+          :star_rating,
+          :comment,
           :_destroy,
         ],
       )
