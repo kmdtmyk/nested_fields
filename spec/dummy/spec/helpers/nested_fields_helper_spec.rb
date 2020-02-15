@@ -14,6 +14,7 @@ RSpec.describe ApplicationHelper, type: :helper do
         end
       end
 
+      expect(form).to include("<template id=\"reviews_nested_fields_template\">")
       expect(form).to include("div class=\"reviews_nested_fields\"")
     end
 
@@ -61,6 +62,17 @@ RSpec.describe ApplicationHelper, type: :helper do
       end
 
       expect(form).to include("input type=\"text\" name=\"book[reviews_attributes][0][comment]\"")
+    end
+
+    example 'maximum length' do
+      book = Book.new
+
+      form = form_with(model: book) do |f|
+        f.nested_fields :tags do |ff|
+        end
+      end
+
+      expect(form).to include("<template id=\"tags_nested_fields_template\" data-maximum=\"3\">")
     end
 
   end

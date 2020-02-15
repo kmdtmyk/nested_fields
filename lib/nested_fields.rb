@@ -28,7 +28,15 @@ module ActionView::Helpers
         end
       end
 
-      output << @template.content_tag(:template, id: "#{name}_nested_fields_template") do
+      validator = object.class.validators.find do |validator|
+        validator.attributes.include? name
+      end
+
+      if validator.present?
+        maximum = validator.options&.fetch(:maximum)
+      end
+
+      output << @template.content_tag(:template, id: "#{name}_nested_fields_template", data: { maximum: maximum} ) do
         @template.content_tag(tag, options) do
           @template.fields_for("#{object_name}[#{name}_attributes][__index__]", nil, self.options, &block)
         end
