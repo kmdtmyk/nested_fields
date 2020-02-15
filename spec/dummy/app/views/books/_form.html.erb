@@ -27,12 +27,23 @@
   </div>
 
   <div>
+    <label>Tags</label>
+    <div style='display: flex; flex-wrap: wrap;'>
+      <%= form.nested_fields :tags do |f| %>
+        <%= f.text_field :name %>
+        <%= f.remove_nested_fields_button 'remove' %>
+      <% end %>
+    </div>
+    <%= form.add_nested_fields_button :tags, 'Add tag' %>
+  </div>
+
+  <div>
     <label>Comments</label>
     <%= form.nested_fields :comments do |f| %>
       <%= f.text_field :content %>
       <%= f.remove_nested_fields_button 'remove' %>
     <% end %>
-    <%= form.add_nested_fields_button :comments, 'add' %>
+    <%= form.add_nested_fields_button :comments, 'Add comment' %>
   </div>
 
   <div>

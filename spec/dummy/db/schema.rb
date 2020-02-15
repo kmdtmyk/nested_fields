@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(version: 2020_01_13_090642) do
     t.index ["book_id"], name: "index_book_comments_on_book_id"
   end
 
+  create_table "book_tags", force: :cascade do |t|
+    t.integer "book_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_book_tags_on_book_id"
+  end
+
   create_table "books", force: :cascade do |t|
     t.string "name"
     t.integer "price"
@@ -29,4 +37,5 @@ ActiveRecord::Schema.define(version: 2020_01_13_090642) do
   end
 
   add_foreign_key "book_comments", "books"
+  add_foreign_key "book_tags", "books"
 end

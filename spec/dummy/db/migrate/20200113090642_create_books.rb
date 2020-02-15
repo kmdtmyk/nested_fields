@@ -9,6 +9,13 @@ class CreateBooks < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
+    create_table :book_tags do |t|
+      t.references :book, foreign_key: true
+      t.string :name
+
+      t.timestamps
+    end
+
     create_table :book_comments do |t|
       t.references :book, foreign_key: true
       t.string :content

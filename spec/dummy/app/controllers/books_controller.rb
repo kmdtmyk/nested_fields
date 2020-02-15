@@ -57,11 +57,16 @@ class BooksController < ApplicationController
         :name,
         :price,
         :release_date,
+        tags_attributes: [
+          :id,
+          :name,
+          :_destroy,
+        ],
         comments_attributes: [
           :id,
           :content,
           :_destroy,
-        ]
+        ],
       )
     end
 end
