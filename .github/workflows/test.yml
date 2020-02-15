@@ -15,6 +15,7 @@ jobs:
     strategy:
       matrix:
         ruby-version: ['2.6.x', '2.5.x']
+        rails-version: ['6.0', '5.2']
 
     steps:
     - uses: actions/checkout@v1
@@ -29,3 +30,5 @@ jobs:
         gem install bundler:1.17.3
         bundle install --jobs 4 --retry 3
         bundle exec rspec
+      env:
+        BUNDLE_GEMFILE: gemfiles/${{ matrix.rails-version }}.gemfile
