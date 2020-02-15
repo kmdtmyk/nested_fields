@@ -17,6 +17,16 @@
   </div>
 
   <div>
+    <%= form.label :price %>
+    <%= form.number_field :price %>
+  </div>
+
+  <div>
+    <%= form.label :release_date %>
+    <%= form.date_field :release_date %>
+  </div>
+
+  <div>
     <label>Comments</label>
     <%= form.nested_fields :comments do |f| %>
       <%= f.text_field :content %>

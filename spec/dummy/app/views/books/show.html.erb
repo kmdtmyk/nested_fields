@@ -5,5 +5,15 @@
   <%= @book.name %>
 </p>
 
+<p>
+  <strong>Price:</strong>
+  <%= @book.price %>
+</p>
+
+<p>
+  <strong>Relase Date:</strong>
+  <%= @book.release_date %>
+</p>
+
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>
