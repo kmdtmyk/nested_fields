@@ -5,6 +5,17 @@ require 'nested_fields/version'
 
 module NestedFields
   # Your code goes here...
+
+  module_function
+
+  def maximum_length(object, name)
+    validator = object.class.validators.find do |validator|
+      validator.attributes.include?(name)
+    end
+
+    validator&.options&.fetch(:maximum)
+  end
+
 end
 
 module ActionView::Helpers
@@ -28,13 +39,7 @@ module ActionView::Helpers
         end
       end
 
-      validator = object.class.validators.find do |validator|
-        validator.attributes.include? name
-      end
-
-      if validator.present?
-        maximum = validator.options&.fetch(:maximum)
-      end
+      maximum = NestedFields.maximum_length(object, name)
 
       output << @template.content_tag(:template, id: "#{name}_nested_fields_template", data: { maximum: maximum} ) do
         @template.content_tag(tag, options) do
@@ -60,6 +65,12 @@ module ActionView::Helpers
 
       options['data-target'] = name
       options[:onclick] = 'NestedFields.add(this)'
+
+      maximum = NestedFields.maximum_length(object, name)
+
+      if maximum.present? && maximum <= object.send(name).size
+        options[:disabled] = true
+      end
 
       @template.content_tag(tag, options) do
         text

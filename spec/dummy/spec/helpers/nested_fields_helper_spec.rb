@@ -130,6 +130,19 @@ RSpec.describe ApplicationHelper, type: :helper do
       expect(form).to include("<button class=\"foo bar\"")
     end
 
+    example 'disabled is (array)' do
+      book = Book.create
+      5.times do
+        book.tags.create
+      end
+
+      form = form_with(model: book) do |f|
+        f.add_nested_fields_button :tags, 'add'
+      end
+
+      expect(form).to include("disabled=\"disabled\">add</button>")
+    end
+
     context 'block' do
 
       example 'basic' do
