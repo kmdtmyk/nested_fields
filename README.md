@@ -46,6 +46,29 @@ app/views/layouts/application.html.erb
 = javascript_include_tag 'application'
 ```
 
+## Example
+
+Change html tag
+
+```erb
+<ul>
+  <%= form.nested_fields :comments, tag: :li do |f| %>
+    <%= f.text_field :content %>
+    <%= f.remove_nested_fields_button 'remove' %>
+  <% end %>
+</div>
+```
+
+Maximum length
+
+```ruby
+class Book < ApplicationRecord
+  has_many :tags, dependent: :destroy
+  accepts_nested_attributes_for :tags, allow_destroy: true
+  validates_length_of :tags, maximum: 5
+end
+```
+
 ## Test
 
 ```
