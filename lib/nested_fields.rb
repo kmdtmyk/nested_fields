@@ -23,6 +23,10 @@ module ActionView::Helpers
   class FormBuilder
 
     def nested_fields(name, options = nil, &block)
+      nested_fields_for(name, object.send(name), options, &block)
+    end
+
+    def nested_fields_for(name, record_object, options = nil, &block)
       options ||= {}
 
       tag = options.delete(:tag){ :div }
@@ -32,7 +36,7 @@ module ActionView::Helpers
 
       output = ActiveSupport::SafeBuffer.new
 
-      object.send(name).each do |child|
+      record_object.each do |child|
         output << @template.content_tag(tag, options) do
           child_index = nested_child_index(name)
           fields_for_nested_model("#{object_name}[#{name}_attributes][#{child_index}]", child, self.options, block)
