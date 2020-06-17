@@ -77,6 +77,27 @@ RSpec.describe ApplicationHelper, type: :helper do
 
   end
 
+  describe 'nested_fields_for' do
+
+    example 'sorted records' do
+      book = Book.create
+      book.reviews.create(comment: '2')
+      book.reviews.create(comment: '1')
+      book.reviews.create(comment: '3')
+
+      form = form_with(model: book) do |f|
+        f.nested_fields_for :reviews, book.reviews.order(:comment) do |ff|
+          ff.text_field :comment
+        end
+      end
+
+      expect(form).to include("input type=\"text\" value=\"1\" name=\"book[reviews_attributes][0][comment]\"")
+      expect(form).to include("input type=\"text\" value=\"2\" name=\"book[reviews_attributes][1][comment]\"")
+      expect(form).to include("input type=\"text\" value=\"3\" name=\"book[reviews_attributes][2][comment]\"")
+    end
+
+  end
+
   describe 'add_nested_fields_button' do
 
     example 'basic' do
