@@ -1,4 +1,4 @@
-FROM ruby:2.5.7-alpine
+FROM ruby:2.7.2-alpine3.13
 
 RUN apk update && \
     apk add \
