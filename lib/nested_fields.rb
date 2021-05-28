@@ -56,7 +56,7 @@ module ActionView::Helpers
 
     def add_nested_fields_button(name, text = nil, options = nil, &block)
       if block_given?
-        return add_nested_fields_button name, yield(block), text
+        return add_nested_fields_button name, @template.capture(&block), text
       end
 
       options ||= {}
@@ -83,7 +83,7 @@ module ActionView::Helpers
 
     def remove_nested_fields_button(text = nil, options = nil, &block)
       if block_given?
-        return remove_nested_fields_button yield(block), text
+        return remove_nested_fields_button @template.capture(&block), text
       end
 
       options ||= {}
