@@ -56,7 +56,7 @@ Change html tag
     <%= f.text_field :content %>
     <%= f.remove_nested_fields_button 'remove' %>
   <% end %>
-</div>
+</ul>
 ```
 
 Maximum length
