@@ -7,8 +7,8 @@ require "nested_fields/version"
 Gem::Specification.new do |spec|
   spec.name        = "nested_fields"
   spec.version     = NestedFields::VERSION
-  spec.authors     = ["kmdtmyk"]
-  spec.email       = ["winback_banderas@yahoo.co.jp"]
+  spec.authors     = [""]
+  spec.email       = [""]
   spec.homepage    = "https://github.com/kmdtmyk/nested_fields"
   spec.summary     = "Summary of NestedFields."
   spec.description = "Description of NestedFields."
